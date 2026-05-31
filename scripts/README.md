@@ -1,8 +1,8 @@
 # scripts/ — 방어 스택 구성요소
 
 > **NginX 살려라 A/D CTF · 교육용·방어 전용.** 모든 자동복구·모니터링 기법은
-> 권한이 부여된 경기 박스 안에서 우리 팀 nginx 가용성을 유지하기 위한 것입니다.
-> 공인 IP·webhook·실명은 마스킹(`X.X.X.X`, `<REDACTED_WEBHOOK_URL>`)되어 있습니다.
+> 권한이 부여된 경기 박스 안에서 우리 팀 nginx 가용성을 유지하기 위한 것이다.
+> 공인 IP·webhook·실명은 마스킹(`X.X.X.X`, `<REDACTED_WEBHOOK_URL>`)되어 있다.
 
 ```
 scripts/
@@ -15,7 +15,7 @@ scripts/
 
 ## 다중 자동복구 매핑
 
-서로 다른 메커니즘이 nginx 복구를 다중화합니다. 한 라인을 끊어도 다른 라인이 복구를 시도하지만, **root가 이들을 한 번에 제거하면 무너집니다** — 보안 경계가 아니라 복구 확률·속도를 높이는 다중화입니다.
+서로 다른 메커니즘이 nginx 복구를 다중화한다. 한 라인을 끊어도 다른 라인이 복구를 시도하지만, **root가 이들을 한 번에 제거하면 무너진다** — 보안 경계가 아니라 복구 확률·속도를 높이는 다중화다.
 
 | 계층 | 메커니즘 | 스크립트 / 유닛 | 주기 |
 |---|---|---|---|
@@ -25,13 +25,13 @@ scripts/
 | ④ | 워치독 보장기 | `bin/sys-integrity.sh` | 10초 |
 | ⑤ | 독립 모니터 | `bin/kworker-mon.sh` (+ `bin/kworker-guard.sh`) | 3초 |
 
-재기동을 여러 계층이 동시에 시도하므로 `flock /run/nginx-defense.lock`으로 **직렬화**합니다. 정상 판정 기준(NEEDLE)은 watchdog·cron·healthz 가 `<h1>NginX를 살려라</h1>`로 통일했습니다.
+재기동을 여러 계층이 동시에 시도하므로 `flock /run/nginx-defense.lock`으로 **직렬화한다.** 정상 판정 기준(NEEDLE)은 watchdog·cron·healthz 가 `<h1>NginX를 살려라</h1>`로 통일했다.
 
-**`chattr +i`:** `index.html` · `nginx.conf` · `sites-available/default` · nginx 바이너리에 immutable. **root를 막는 게 아니라**(root는 `chattr -i`로 푼다) 우발·비root·단순 변조 방지와 공격 지연용입니다.
+**`chattr +i`:** `index.html` · `nginx.conf` · `sites-available/default` · nginx 바이너리에 immutable. **root를 막는 게 아니라**(root는 `chattr -i`로 푼다) 우발·비root·단순 변조 방지와 공격 지연용이다.
 
 ## 서비스명 추상화 — systemd 서비스 이름
 
-방어 서비스의 `Description=`·서비스명을 일반적인 모니터처럼 추상화해 **단순 탐색 비용을 늘립니다.** 이는 **실무 보안 기법이 아니며 보안 경계도 아닙니다** — `systemctl list-units`·`ls -l /proc/<pid>/exe`로는 그대로 드러납니다.
+방어 서비스의 `Description=`·서비스명을 일반적인 모니터처럼 추상화해 **단순 탐색 비용을 늘린다.** 이는 **실무 보안 기법이 아니며 보안 경계도 아니다** — `systemctl list-units`·`ls -l /proc/<pid>/exe`로는 그대로 드러난다.
 
 | 유닛 | 표시명(Description) | 실제 역할 |
 |---|---|---|
@@ -46,12 +46,12 @@ scripts/
 | `cmdmon` | Command Collector | 공격자 명령 수집 |
 | `sysmon` | System Monitor Collector | 종합 상태 수집 |
 
-추가로 `kworker-mon.sh`·`fw-guard.sh` 등은 dotfile·커널 스레드(`kworker`) 유사 이름으로 배치해 단순 탐색을 지연시킵니다(역시 보안 경계가 아닙니다).
+추가로 `kworker-mon.sh`·`fw-guard.sh` 등은 dotfile·커널 스레드(`kworker`) 유사 이름으로 배치해 단순 탐색을 지연시킨다(역시 보안 경계가 아니다).
 
 ## cron · audit · config
 
 - **`cron/root.crontab`** — systemd와 독립된 1분 복구 라인 + 핵심 서비스 부활. (파일 상단 주석 참고)
-- **`audit/attacker.rules`** — `auid>=1000`(사람)의 `execve`만 기록 → `cmd-collect.sh`가 파싱. 이 필터가 빠지면 데몬 명령 노이즈에 묻힙니다. 룰 끝에 **`-e 2`** 로 불변화해 root의 `auditctl -D` 삭제는 막았습니다. 단, **root 직접 로그인(auid=0)은 누락**되고 auditd 데몬 자체의 stop은 여전히 가능합니다.
+- **`audit/attacker.rules`** — `auid>=1000`(사람)의 `execve`만 기록 → `cmd-collect.sh`가 파싱. 이 필터가 빠지면 데몬 명령 노이즈에 묻힌다. 룰 끝에 **`-e 2`** 로 불변화해 root의 `auditctl -D` 삭제는 막았다. 단, **root 직접 로그인(auid=0)은 누락**되고 auditd 데몬 자체의 stop은 여전히 가능하다.
 - **`config/nginx-site-default.conf`** — nginx 기본 사이트 설정. `config/ip_names.example` — IP↔이름 매핑 형식 예시(실파일은 비공개).
 
 ## 배포 메모
