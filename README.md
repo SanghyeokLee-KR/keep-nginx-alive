@@ -68,7 +68,7 @@ root 공격자는 마음만 먹으면 로컬 방어(`chattr`·systemd·cron·wat
 | **Infra** | AWS (NLB, EC2, IAM) | 3중 백엔드 페일오버 아키텍처 구성 및 오염 노드 트래픽 우회 |
 | **Web** | Nginx | 메인 타겟 웹 서비스 (방어 대상) |
 | **System** | Linux (systemd, cron, chattr), Bash | 프로세스 다중 복구 파이프라인 구축 및 파일 무결성 보호 |
-| **Monitor** | auditd, Power Automate, MS Teams | 공격자 명령어 후킹 및 실시간 관제·알림 파이프라인 구축 |
+| **Monitor** | auditd, Power Automate, MS Teams | 공격자 명령어 추적·수집 및 실시간 관제·알림 파이프라인 구축 |
 | **Docs** | draw.io | 방어 아키텍처 및 타임라인 다이어그램 설계 |
 
 ---
