@@ -1,0 +1,135 @@
+---
+# playbook.yml — NginX 살려라 방어 스택 배포 (교육용·방어 전용)
+#
+#   수작업 cp 로 배포하던 스크립트·systemd 유닛·cron·auditd 룰을 IaC로 코드화해
+#   "재현 가능한 배포"를 제공한다. 같은 결과를 멱등(idempotent)하게 보장.
+#
+#   실행: ansible-playbook -i inventory.ini playbook.yml
+#
+#   주의: 실서비스라면 인스턴스 내부 배포보다 ASG 교체형이 적절하다(README 한계 참고).
+#         /etc/nginx-defense/ 의 실제 값(index.html·ip_names·webhook)은 환경/개인정보라
+#         별도 제공한다 — 아래 'config' 태스크는 예시 구조만 배치한다.
+
+- name: Deploy nginx-defense stack
+  hosts: nginx_defense
+  become: true
+
+  vars:
+    repo_scripts: "{{ playbook_dir }}/../scripts"
+    # 점파일로 배치하는 스크립트 — 단순 탐색 비용을 늘리는 보조 수단(보안 경계 아님).
+    # 저장소엔 일반 이름으로 두고, 배포 시 '.name.sh' 로 떨어뜨린다.
+    hidden_scripts:
+      - kworker-mon
+      - kworker-guard
+      - fw-guard
+      - healthz-checker
+      - tamper-alert
+      - unmask-guard
+    defense_units:
+      - nginx-wd-a
+      - nginx-wd-b
+      - sys-integrity
+      - cmdmon
+      - healthz-mon
+      - svc-health
+      - net-filter-mon
+      - net-status-mon
+      - content-mon
+      - kworker-mon
+      - sysmon
+
+  tasks:
+    - name: 의존 패키지 설치 (gawk = cmd-collect 의 3-인자 match 필수)
+      ansible.builtin.apt:
+        name: [gawk, auditd, curl]
+        state: present
+        update_cache: true
+
+    - name: 설정 디렉터리 생성 (/etc/nginx-defense)
+      ansible.builtin.file:
+        path: /etc/nginx-defense
+        state: directory
+        mode: "0755"
+
+    - name: nginx drop-in 디렉터리 생성
+      ansible.builtin.file:
+        path: /etc/systemd/system/nginx.service.d
+        state: directory
+        mode: "0755"
+
+    - name: 일반 스크립트 배치 (/usr/local/bin)
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "/usr/local/bin/{{ item | basename }}"
+        mode: "0755"
+      with_fileglob:
+        - "{{ repo_scripts }}/bin/*.sh"
+      when: (item | basename | splitext | first) not in hidden_scripts
+
+    - name: 점파일 스크립트 배치 (.name.sh — 보안 경계 아님)
+      ansible.builtin.copy:
+        src: "{{ repo_scripts }}/bin/{{ item }}.sh"
+        dest: "/usr/local/bin/.{{ item }}.sh"
+        mode: "0755"
+      loop: "{{ hidden_scripts }}"
+
+    - name: systemd 유닛/타이머 배치
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "/etc/systemd/system/{{ item | basename }}"
+        mode: "0644"
+      with_fileglob:
+        - "{{ repo_scripts }}/systemd/*.service"
+        - "{{ repo_scripts }}/systemd/*.timer"
+
+    - name: nginx Restart override 배치 (StartLimit 은 [Unit] 섹션)
+      ansible.builtin.copy:
+        src: "{{ repo_scripts }}/systemd/nginx-override.conf"
+        dest: /etc/systemd/system/nginx.service.d/override.conf
+        mode: "0644"
+
+    - name: auditd 룰 배치 (-e 2 불변화 포함)
+      ansible.builtin.copy:
+        src: "{{ repo_scripts }}/audit/attacker.rules"
+        dest: /etc/audit/rules.d/attacker.rules
+        mode: "0640"
+      notify: reload auditd
+
+    - name: cron 마스터 사본 배치 (전체 crontab 자가복원용)
+      ansible.builtin.copy:
+        src: "{{ repo_scripts }}/cron/root.crontab"
+        dest: /etc/nginx-defense/root.crontab
+        mode: "0644"
+
+    - name: root crontab 설치
+      ansible.builtin.command: crontab /etc/nginx-defense/root.crontab
+      changed_when: true
+
+    - name: 보호 대상/설정 예시 배치 (실제 값은 별도 제공)
+      ansible.builtin.copy:
+        src: "{{ repo_scripts }}/config/nginx-defense.example/{{ item }}"
+        dest: "/etc/nginx-defense/{{ item }}"
+        mode: "0644"
+        force: false        # 이미 실제 값이 있으면 덮어쓰지 않음
+      loop:
+        - webroot
+        - index.html
+
+    - name: systemd 리로드 + 방어 서비스 enable/start
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+        daemon_reload: true
+      loop: "{{ defense_units }}"
+
+    - name: nginx 재시작 (override 반영)
+      ansible.builtin.systemd:
+        name: nginx
+        state: restarted
+        daemon_reload: true
+
+  handlers:
+    - name: reload auditd
+      ansible.builtin.command: augenrules --load
+      changed_when: true
