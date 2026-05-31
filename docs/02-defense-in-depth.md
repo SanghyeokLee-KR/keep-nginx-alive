@@ -19,13 +19,17 @@
 ### ① systemd 자가복구
 
 ```ini
+# /etc/systemd/system/nginx.service.d/override.conf
+[Unit]
+StartLimitIntervalSec=60
+StartLimitBurst=20
+
 [Service]
 Restart=always
 RestartSec=2
-StartLimitIntervalSec=0
 ```
 
-`kill` 당해도 systemd가 2초 내 재기동. `StartLimitIntervalSec=0`으로 "너무 자주 죽으면 포기" 동작을 끈 게 포인트 — 공격자가 빠르게 반복 kill 해도 멈추지 않는다.
+`kill` 당해도 systemd가 2초 내 재기동한다. `StartLimit*`은 **`[Unit]` 섹션 키**다 — systemd 229+에서 `[Service]`에 두면 "Unknown key"로 무시되므로 위치가 중요하다. 60초당 20회까지 재기동을 허용해 반복 kill에는 공격적으로 되살아나되, 깨진 바이너리가 무한 크래시 루프로 CPU를 태우는 것은 막는다. 한도를 넘겨 systemd가 잠시 멈추면 watchdog(5초)·cron(1분)이 `reset-failed` 후 복구를 이어받는다.
 
 ### ② watchdog A·B — 응답 본문으로 판정
 
