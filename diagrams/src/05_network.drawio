@@ -1,0 +1,74 @@
+<mxfile host="Electron">
+  <diagram name="네트워크·보안그룹" id="net0lAC5Prso4UT0005">
+    <mxGraphModel dx="2175" dy="1295" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1340" pageHeight="840" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t" parent="1" style="text;html=1;align=left;fontSize=20;fontStyle=1;fontColor=#232F3E;" value="네트워크·보안그룹 — 포트 레벨 접근 제어 (Security Group)" vertex="1">
+          <mxGeometry height="30" width="1000" x="50" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="st" parent="1" style="text;html=1;align=left;fontSize=11;fontColor=#5A6B73;" value="공격자는 root 권한이 있어도 #1에만 SSH 가능 — #2/#3은 SSH(22) 차단 + NLB에서만 :80 수신. tg-ssh(#1만 등록) + 보안그룹(#2/#3 22 차단) 이중 차단으로 공격 표면이 #1 하나로 한정된다." vertex="1">
+          <mxGeometry height="20" width="1240" x="50" y="58" as="geometry" />
+        </mxCell>
+        <mxCell id="atk" parent="1" style="sketch=0;outlineConnect=0;fontColor=#D13212;gradientColor=none;fillColor=#D13212;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.user;" value="어태커 (교수님)&#xa;SSH :22" vertex="1">
+          <mxGeometry height="58" width="50" x="66" y="258" as="geometry" />
+        </mxCell>
+        <mxCell id="bot" parent="1" style="sketch=0;outlineConnect=0;fontColor=#1B660F;gradientColor=none;fillColor=#1B660F;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.users;" value="채점 봇&#xa;HTTP :80" vertex="1">
+          <mxGeometry height="56" width="64" x="60" y="452" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#248814;strokeWidth=1.5;dashed=1;verticalAlign=top;align=left;spacingLeft=14;spacingTop=10;fontSize=12;fontColor=#248814;fontStyle=1;" value="VPC · ap-northeast-2  ·  subnet ap-northeast-2c" vertex="1">
+          <mxGeometry height="610" width="1090" x="200" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="nlb" parent="1" style="sketch=0;points=[];outlineConnect=0;fontColor=#232F3E;gradientColor=#945DF2;gradientDirection=north;fillColor=#5A30B5;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_load_balancer;" value="NLB · EIP&#xa;:80 → tg-web · :22 → tg-ssh" vertex="1">
+          <mxGeometry height="78" width="78" x="270" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="sg1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDF2F2;strokeColor=#D13212;dashed=1;dashPattern=6 4;verticalAlign=top;align=left;spacingLeft=14;spacingTop=8;fontSize=12;fontColor=#B00020;fontStyle=1;" value="sg-nginx-attack  ·  #1 보안그룹 (SSH 열림)" vertex="1">
+          <mxGeometry height="150" width="640" x="600" y="168" as="geometry" />
+        </mxCell>
+        <mxCell id="ec1" parent="1" style="sketch=0;points=[];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#D13212;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" value="#1 nginx&#xa;어태커 진입점" vertex="1">
+          <mxGeometry height="66" width="66" x="636" y="208" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E0A0A0;align=left;spacingLeft=14;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" value="inbound 규칙&#xa;✓ TCP:22 (SSH)  ·  ✓ TCP:80 (from NLB)" vertex="1">
+          <mxGeometry height="62" width="450" x="740" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="sg2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F2F8F0;strokeColor=#1D8102;dashed=1;dashPattern=6 4;verticalAlign=top;align=left;spacingLeft=14;spacingTop=8;fontSize=12;fontColor=#1B5E20;fontStyle=1;" value="sg-nginx-svc  ·  #2 · #3 보안그룹 (SSH 차단)" vertex="1">
+          <mxGeometry height="312" width="640" x="600" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2" parent="1" style="sketch=0;points=[];outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" value="#2 svc&#xa;AMI 클론" vertex="1">
+          <mxGeometry height="66" width="66" x="636" y="396" as="geometry" />
+        </mxCell>
+        <mxCell id="ec3" parent="1" style="sketch=0;points=[];outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" value="#3 svc&#xa;AMI 클론" vertex="1">
+          <mxGeometry height="66" width="66" x="636" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="r2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A8CDA8;align=left;spacingLeft=14;verticalAlign=middle;fontSize=12;fontColor=#232F3E;" value="inbound 규칙&#xa;✓ TCP:80 (from NLB) &lt;b&gt;only&lt;/b&gt;&#xa;✗ TCP:22 (SSH) — 차단 (inbound 22 규칙 없음)" vertex="1">
+          <mxGeometry height="86" width="450" x="740" y="436" as="geometry" />
+        </mxCell>
+        <mxCell id="call" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#D6B656;fontColor=#5A4A00;fontSize=12;align=left;spacingLeft=14;verticalAlign=middle;" value="이중 차단 — 어태커가 root여도 #2/#3엔 손댈 수 없음 :  ① NLB tg-ssh에 &lt;b&gt;#1만 등록&lt;/b&gt;  ·  ② 보안그룹에서 &lt;b&gt;#2/#3 inbound 22 차단&lt;/b&gt;. 공격 표면 = #1 하나로 한정." vertex="1">
+          <mxGeometry height="46" width="1090" x="200" y="752" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="atk" style="endArrow=block;html=1;rounded=0;strokeColor=#D13212;strokeWidth=2;fontColor=#922B21;fontSize=11;fontStyle=1;exitX=1;exitY=0.4;entryX=0;entryY=0.3;" target="nlb" value=":22 SSH 시도">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="bot" style="endArrow=block;html=1;rounded=0;strokeColor=#5F5E5A;strokeWidth=2;fontColor=#2C2C2A;fontSize=11;exitX=1;exitY=0.5;entryX=0;entryY=0.7;" target="nlb" value=":80 HTTP 채점">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="nlb" style="endArrow=block;html=1;rounded=0;strokeColor=#D13212;strokeWidth=2.5;fontColor=#922B21;fontSize=11;fontStyle=1;exitX=1;exitY=0.3;entryX=0;entryY=0.5;" target="ec1" value="TCP:22 (tg-ssh) + TCP:80">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="nlb" style="endArrow=block;html=1;rounded=0;strokeColor=#1D8102;strokeWidth=2;fontColor=#1B5E20;fontSize=11;exitX=1;exitY=0.6;entryX=0;entryY=0.5;" target="ec2" value="TCP:80">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="1" source="nlb" style="endArrow=block;html=1;rounded=0;strokeColor=#1D8102;strokeWidth=2;fontColor=#1B5E20;fontSize=11;exitX=1;exitY=0.75;entryX=0;entryY=0.5;" target="ec3" value="TCP:80">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="573" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ablk" edge="1" parent="1" source="nlb" style="endArrow=block;endFill=0;html=1;rounded=0;dashed=1;strokeColor=#B85450;strokeWidth=1.5;fontColor=#B85450;fontSize=11;fontStyle=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="sg2" value="✗ :22 차단">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,151 @@
+<mxfile host="Electron">
+  <diagram name="3. 관측·감시" id="EVtUWZi1bQ-ZllduAEKg">
+    <mxGraphModel dx="1664" dy="991" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1340" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;fontColor=#232F3E;" value="관측·감시 파이프라인 — 이벤트 수집 → 감지 → Teams 3채널 · 로그 · 대시보드" vertex="1">
+          <mxGeometry height="30" width="1100" x="40" y="22" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;fontSize=11;align=left;verticalAlign=middle;fontColor=#5A6B73;" value="EC2 #1의 보안 이벤트(로그인·명령·nginx 상태)를 수집·감지해 Power Automate webhook으로 Teams 3채널에 실시간 알림하고, 영구 로그·대시보드로 남긴다." vertex="1">
+          <mxGeometry height="20" width="1150" x="40" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2" parent="1" style="rounded=1;arcSize=2;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#ED7100;strokeWidth=1.5;verticalAlign=top;align=left;spacingLeft=44;spacingTop=11;fontSize=13;fontColor=#ED7100;fontStyle=1;" value="EC2 #1 — 이벤트 발생 · 수집 · 산출물" vertex="1">
+          <mxGeometry height="468" width="560" x="40" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ec2ic" parent="1" style="sketch=0;points=[];outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;html=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" value="" vertex="1">
+          <mxGeometry height="26" width="26" x="54" y="159" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;fontColor=#B85450;" value="① 이벤트 소스" vertex="1">
+          <mxGeometry height="20" width="180" x="62" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;fontColor=#7D3AC1;" value="② 수집·감지 (스크립트)" vertex="1">
+          <mxGeometry height="20" width="220" x="296" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="h3" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;fontColor=#2563EB;" value="③ 전송 (Power Automate)" vertex="1">
+          <mxGeometry height="20" width="220" x="636" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="h4" parent="1" style="text;html=1;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;fontColor=#5059C9;" value="④ Teams 3채널" vertex="1">
+          <mxGeometry height="20" width="200" x="900" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#B85450&quot;&gt;SSH 로그인&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;auditd · PAM&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="190" x="62" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#B85450&quot;&gt;어태커 명령&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font face=&quot;Courier New&quot; color=&quot;#6B7785&quot;&gt;execve · auid≥1000&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="190" x="62" y="298" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B85450;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#B85450&quot;&gt;nginx 상태&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;2초 헬스 폴링&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="190" x="62" y="376" as="geometry" />
+        </mxCell>
+        <mxCell id="log" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5A8C6E;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#3A6B4E&quot;&gt;영구 로그 (웹루트)&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font face=&quot;Courier New&quot; color=&quot;#6B7785&quot;&gt;cmds.json · sysmon.json · c-9f3k2x.json&lt;/font&gt;" vertex="1">
+          <mxGeometry height="54" width="320" x="166" y="462" as="geometry" />
+        </mxCell>
+        <mxCell id="dash" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5A8C6E;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#3A6B4E&quot;&gt;실시간 대시보드&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font face=&quot;Courier New&quot; color=&quot;#6B7785&quot;&gt;attack-monitor.html&lt;/font&gt;&lt;font color=&quot;#6B7785&quot;&gt; · 2초 폴링 (동일 오리진)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="54" width="320" x="166" y="544" as="geometry" />
+        </mxCell>
+        <mxCell id="t1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5059C9;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#3D45A8&quot;&gt;SSH 로그인 방&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;누가 · 언제 접속&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="256" x="900" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5059C9;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#3D45A8&quot;&gt;명령어 감시 방&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;어태커가 친 명령 실시간&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="256" x="900" y="298" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5059C9;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#3D45A8&quot;&gt;nginx 다운·복구 방&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;다운→복구 전이 + 생존보고&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="256" x="900" y="376" as="geometry" />
+        </mxCell>
+        <mxCell id="hb" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D79B00;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#9A7300&quot;&gt;5분 정기 생존보고&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;heartbeat timer → 3대+NLB+watchdog 종합&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="300" x="790" y="544" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="text;html=1;fontSize=11;align=left;verticalAlign=middle;fontColor=#5A6B73;" value="범례 — 굵은 실선 = 알림 흐름 · 점선 = 로그 기록/폴링 · 색 = 스테이지(빨강 소스 · 보라 감지 · 파랑 전송 · 인디고 Teams · 초록 산출물)" vertex="1">
+          <mxGeometry height="20" width="900" x="40" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B0B0B0;fontSize=11;fontColor=#52606D;verticalAlign=middle;align=center;" value="담당 분담 — A : SSH 로그인 방 · B : 명령어 감시 방 · C : nginx 다운·복구 방 (+ 생존보고)" vertex="1">
+          <mxGeometry height="40" width="700" x="456" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="es1" edge="1" parent="1" source="s1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7B8794;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es2" edge="1" parent="1" source="s2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7B8794;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="es3" edge="1" parent="1" source="s3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#7B8794;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="d3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dw1" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.14;" target="wh">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="541" y="248" />
+              <mxPoint x="541" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dw2" edge="1" parent="1" source="d2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="wh">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="529" y="326" />
+              <mxPoint x="529" y="328" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dw3" edge="1" parent="1" source="d3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.86;" target="wh">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="536" y="404" />
+              <mxPoint x="536" y="406" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wt1" edge="1" parent="1" source="wh" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.14;entryX=0;entryY=0.5;" target="t1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="794" y="250" />
+              <mxPoint x="794" y="248" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wt2" edge="1" parent="1" source="wh" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="t2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="328" />
+              <mxPoint x="780" y="326" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="wt3" edge="1" parent="1" source="wh" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=2;endArrow=block;endFill=1;exitX=1;exitY=0.86;entryX=0;entryY=0.5;" target="t3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="797" y="406" />
+              <mxPoint x="797" y="404" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ld" edge="1" parent="1" source="log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#5A8C6E;strokeWidth=1.5;dashed=1;endArrow=open;fontColor=#3A5A47;fontSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="dash" value="폴링·표시">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sd" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#5A8C6E;strokeWidth=1.5;dashed=1;endArrow=open;fontColor=#3A5A47;fontSize=10;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="log" value="기록">
+          <mxGeometry relative="1" x="-0.4821" y="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="111" y="489" />
+            </Array>
+            <mxPoint x="111" y="432" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ht" edge="1" parent="1" source="hb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#D79B00;strokeWidth=2;endArrow=block;endFill=1;fontColor=#7A5A00;fontSize=10;exitX=0.5;exitY=0;entryX=0.3;entryY=1;" target="t3" value="5분마다">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7D3AC1;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font color=&quot;#7D3AC1&quot;&gt;로그인 감지&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;세션 IP·시각 추출 → 알림&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="250" x="296" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7D3AC1;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font face=&quot;Courier New&quot; color=&quot;#7D3AC1&quot;&gt;cmd-collect.sh&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;audit.log tail+awk · event-ID 짝짓기&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="250" x="296" y="298" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7D3AC1;align=left;spacingLeft=14;verticalAlign=middle;fontSize=11;fontColor=#232F3E;" value="&lt;b&gt;&lt;font face=&quot;Courier New&quot; color=&quot;#7D3AC1&quot;&gt;nginx-status-alert.sh&lt;/font&gt;&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot;&gt;다운→복구 상태 전이 감지&lt;/font&gt;" vertex="1">
+          <mxGeometry height="56" width="250" x="296" y="376" as="geometry" />
+        </mxCell>
+        <mxCell id="wh" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2563EB;strokeWidth=2;align=center;verticalAlign=middle;fontSize=12;fontColor=#15366B;" value="&lt;b&gt;Power Automate&lt;br&gt;Webhook&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#6B7785&quot; style=&quot;font-size:11px&quot;&gt;AdaptiveCard&lt;br&gt;KST · 복구 소요시간&lt;/font&gt;" vertex="1">
+          <mxGeometry height="216" width="170" x="636" y="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

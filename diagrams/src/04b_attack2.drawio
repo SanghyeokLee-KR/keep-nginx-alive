@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram name="페이지-1" id="9yg7MIR9YQ2w_t_F65z4">
+    <mxGraphModel dx="1768" dy="594" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="792" width="1300" x="55" y="473" as="geometry" />
+        </mxCell>
+        <mxCell id="3" parent="2" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="792" width="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="4" parent="2" style="text;html=1;align=left;fontSize=22;fontStyle=1;fontColor=#232F3E;" value="5조 NGINX 방어 — 2차 공격: 80 포트 하이재킹" vertex="1">
+          <mxGeometry height="32" width="1000" x="36.33352941176486" y="11.996470588235297" as="geometry" />
+        </mxCell>
+        <mxCell id="5" parent="2" style="text;html=1;align=left;fontSize=12;fontColor=#6B6B6B;" value="~07:50 KST · 교수님이 apache2를 설치해 nginx를 내리고 80을 탈취 — nginx 80 상실 시 NLB가 #1을 빼고 #2·#3로 우회, 채점 가용성 유지" vertex="1">
+          <mxGeometry height="20" width="1150" x="36.33352941176486" y="45.9964705882353" as="geometry" />
+        </mxCell>
+        <mxCell id="6" parent="2" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C0392B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.user;" value="교수님 / 어태커&#xa;X.X.X.X" vertex="1">
+          <mxGeometry height="78" width="78" x="77.33352941176486" y="87.9964705882353" as="geometry" />
+        </mxCell>
+        <mxCell id="7" parent="2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#04342C;fontSize=12;align=center;verticalAlign=middle;" value="결과: 80을 빼앗겨도 헬스체크 실패 → NLB가 #1을 unhealthy로 빼고 #2·#3로 우회 → 채점봇 200 연속, 다운타임 0. 이후 apache2 purge·nginx 복구로 #1 healthy 복귀." vertex="1">
+          <mxGeometry height="42" width="1240" x="36.33352941176486" y="713.9964705882353" as="geometry" />
+        </mxCell>
+        <mxCell id="8" parent="2" style="text;html=1;align=left;fontSize=11;fontColor=#5F5E5A;" value="범례 — 빨강 실선: 공격 명령 · 앰버: 헬스 판정 · 보라: LB 라우팅 · 회색: 채점 요청 · 파랑: 정상 응답 · 청록: 방어/복구" vertex="1">
+          <mxGeometry height="20" width="1240" x="36.33352941176486" y="765.9964705882353" as="geometry" />
+        </mxCell>
+        <mxCell id="9" connectable="0" parent="2" style="group" value="" vertex="1">
+          <mxGeometry height="610" width="1098.9999999999998" x="116.33352941176486" y="87.9964705882353" as="geometry" />
+        </mxCell>
+        <mxCell id="10" parent="9" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#D13212;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" value="#1 nginx-1-attack&#xa;방어 시스템" vertex="1">
+          <mxGeometry height="78" width="78" x="261" as="geometry" />
+        </mxCell>
+        <mxCell id="11" parent="9" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#945DF2;gradientDirection=north;fillColor=#5A30B5;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.network_load_balancer;" value="NLB&#xa;nginx-nlb" vertex="1">
+          <mxGeometry height="78" width="78" x="560.9999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="9" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;gradientColor=#F78E04;gradientDirection=north;fillColor=#D05C17;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.ec2;" value="#2 · #3&#xa;정상 백엔드" vertex="1">
+          <mxGeometry height="78" width="78" x="800.9999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="9" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#1B660F;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.users;" value="채점봇&#xa;HTTP :80 가용성 채점" vertex="1">
+          <mxGeometry height="78" width="78" x="1020.9999999999998" as="geometry" />
+        </mxCell>
+        <mxCell id="14" edge="1" parent="9" style="endArrow=none;dashed=1;html=1;strokeColor=#B4B2A9;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="100" as="sourcePoint" />
+            <mxPoint y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="15" edge="1" parent="9" style="endArrow=none;dashed=1;html=1;strokeColor=#B4B2A9;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="100" as="sourcePoint" />
+            <mxPoint x="300" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="16" edge="1" parent="9" style="endArrow=none;dashed=1;html=1;strokeColor=#B4B2A9;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="599.9999999999998" y="100" as="sourcePoint" />
+            <mxPoint x="599.9999999999998" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="17" edge="1" parent="9" style="endArrow=none;dashed=1;html=1;strokeColor=#B4B2A9;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="839.9999999999998" y="100" as="sourcePoint" />
+            <mxPoint x="839.9999999999998" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="18" edge="1" parent="9" style="endArrow=none;dashed=1;html=1;strokeColor=#B4B2A9;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1059.9999999999998" y="100" as="sourcePoint" />
+            <mxPoint x="1059.9999999999998" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="19" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;fontColor=#922B21;fontSize=11;" value="① apt-get install apache2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="150" as="sourcePoint" />
+            <mxPoint x="300" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;fontColor=#922B21;fontSize=11;" value="② stop+disable nginx · fuser -k 80/tcp · start apache2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="194" as="sourcePoint" />
+            <mxPoint x="300" y="194" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="21" parent="9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAEEDA;strokeColor=#854F0B;fontColor=#633806;fontSize=11;align=center;verticalAlign=middle;" value="nginx 설정·바이너리 immutable → 변조 차단 · 단 80 포트는 apache2가 점유" vertex="1">
+          <mxGeometry height="40" width="320" x="160" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="22" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#854F0B;strokeWidth=2;fontColor=#633806;fontSize=11;" value="③ nginx 80 미바인딩 → /healthz 실패 → unhealthy">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="290" as="sourcePoint" />
+            <mxPoint x="599.9999999999998" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="23" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#5A30B5;strokeWidth=2;fontColor=#5A30B5;fontSize=11;" value="④ 트래픽 우회 라우팅">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="599.9999999999998" y="332" as="sourcePoint" />
+            <mxPoint x="839.9999999999998" y="332" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="24" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#5F5E5A;strokeWidth=2;fontColor=#2C2C2A;fontSize=11;" value="GET / (가용성 채점)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1059.9999999999998" y="374.00000000000006" as="sourcePoint" />
+            <mxPoint x="599.9999999999998" y="374.00000000000006" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="25" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#185FA5;strokeWidth=2;fontColor=#0C447C;fontSize=11;" value="200 OK (#2·#3 응답) — 가용성 유지">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="599.9999999999998" y="416.00000000000006" as="sourcePoint" />
+            <mxPoint x="1059.9999999999998" y="416.00000000000006" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="26" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#C0392B;strokeWidth=2;fontColor=#922B21;fontSize=11;" value="⑤ fuser -k -9 80 · pkill -9 nginx · start apache2 · disable nginx (재시도 07:57)">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="458" as="sourcePoint" />
+            <mxPoint x="300" y="458" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" parent="9" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5EE;strokeColor=#0F6E56;fontColor=#04342C;fontSize=11;align=center;verticalAlign=middle;" value="팀 대응: apache2 purge · 80 회수 · nginx re-enable · (TODO: apt-mark hold)" vertex="1">
+          <mxGeometry height="40" width="340" x="150" y="486" as="geometry" />
+        </mxCell>
+        <mxCell id="28" edge="1" parent="9" style="endArrow=block;html=1;rounded=0;strokeColor=#0F6E56;strokeWidth=2;fontColor=#04342C;fontSize=11;" value="⑥ nginx 복구 → /healthz 200 → healthy 복귀">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="554" as="sourcePoint" />
+            <mxPoint x="599.9999999999998" y="554" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
