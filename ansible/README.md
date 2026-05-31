@@ -33,5 +33,5 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ## 한계
 
-- 멱등 배포까지만. **인스턴스 자체의 자동 교체·확장은 다루지 않는다** — 실무라면 Terraform(ASG/Launch Template/Multi-AZ) + 이 플레이북(또는 user-data)의 조합으로 간다.
+- 멱등 배포까지만. **인스턴스 자체의 자동 교체·확장은 다루지 않는다**. 실무라면 Terraform(ASG/Launch Template/Multi-AZ) + 이 플레이북(또는 user-data)의 조합으로 간다.
 - systemd 유닛 하드닝(`ProtectSystem` 등)은 적용하지 않았다(복구 데몬이 root·`systemctl`·일부 `sudo`를 필요로 해 호환성 검증이 필요 — 향후 과제).
