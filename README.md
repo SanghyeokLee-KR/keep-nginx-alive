@@ -61,7 +61,15 @@
 
 root 공격자는 마음만 먹으면 로컬 방어(`chattr`·systemd·cron·watchdog)를 우회할 수 있다. 그래서 목표를 "완전 차단"이 아니라 **복구를 자동화하고, 끝내 오염되면 그 노드를 채점망에서 빼 정상 노드로 우회**하는 데 뒀다.
 
-**기술 스택** — nginx · systemd · cron · auditd · `chattr` · Bash · AWS(NLB · EC2 · IAM) · Power Automate / Teams · draw.io
+### 기술 스택
+
+| 분류 | 기술 | 주요 용도 |
+| :--- | :--- | :--- |
+| **Infra** | AWS (NLB, EC2, IAM) | 3중 백엔드 페일오버 아키텍처 구성 및 오염 노드 트래픽 우회 |
+| **Web** | Nginx | 메인 타겟 웹 서비스 (방어 대상) |
+| **System** | Linux (systemd, cron, chattr), Bash | 프로세스 다중 복구 파이프라인 구축 및 파일 무결성 보호 |
+| **Monitor** | auditd, Power Automate, MS Teams | 공격자 명령어 후킹 및 실시간 관제·알림 파이프라인 구축 |
+| **Docs** | draw.io | 방어 아키텍처 및 타임라인 다이어그램 설계 |
 
 ---
 
