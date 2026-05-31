@@ -1,0 +1,39 @@
+# === 실제 개인정보 / 비밀값 (절대 커밋 금지) ===
+# 팀원 IP↔실명 매핑 실파일 — 예시(ip_names.example)만 공개
+ip_names
+scripts/config/ip_names
+**/ip_names
+
+# 키 파일
+*.ppk
+*.pem
+id_rsa*
+*.key
+
+# === 런타임 생성 데이터 (서버에서 동적 생성) ===
+cmdlog.tsv
+cmds.tmp
+cmds.json
+sysmon.json
+c-9f3k2x.json
+conn-history.json
+*.bak
+*.tmp
+*.log
+
+# === OS / 에디터 ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# draw.io 데스크탑 백업/스크래치
+*.bkp
+.$*
+
+# 다이어그램 재설계 전 로컬 백업본 (공개 X · 복구용)
+*_backup.drawio
+*_backup.png

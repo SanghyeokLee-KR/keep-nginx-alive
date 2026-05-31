@@ -1,0 +1,8 @@
+# 모든 텍스트 파일 LF로 정규화 (셸/유닛 스크립트는 리눅스 배포 대상)
+* text=auto eol=lf
+
+# 다이어그램·이미지는 정규화 제외
+*.png         binary
+*.jpg         binary
+*.drawio      -text
+*.drawio.xml  -text
