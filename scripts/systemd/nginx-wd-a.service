@@ -1,0 +1,10 @@
+[Unit]
+Description=System Resource Monitor A
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+ExecStart=/usr/local/bin/nginx-watchdog.sh A nginx-wd-b
+Restart=always
+RestartSec=2
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=NGINX Heartbeat Timer
+[Timer]
+OnBootSec=60
+OnUnitActiveSec=5min
+AccuracySec=10
+[Install]
+WantedBy=timers.target

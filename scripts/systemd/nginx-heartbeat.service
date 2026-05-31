@@ -1,0 +1,5 @@
+[Unit]
+Description=NGINX Heartbeat Report
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/nginx-heartbeat.sh

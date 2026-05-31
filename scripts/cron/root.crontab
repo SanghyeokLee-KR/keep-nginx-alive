@@ -1,0 +1,21 @@
+# root.crontab — NginX 살려라 방어 스택의 cron 라인 (모두 1분 주기)
+#
+#   systemd와 '독립된' 복구·수집 라인. systemd 전체가 망가져도 cron이 살아있는 한
+#   복구가 돈다 (복구 경로 이중화).
+#     .kworker-guard.sh    독립 데몬(.kworker-mon) 부활
+#     nginx-cron-guard.sh  index 복원 + nginx/워치독 재기동 + cron 자가복원
+#     conn-history.sh      SSH 접속 이력 갱신
+#     cmdmon / healthz-mon  핵심 서비스가 꺼지면 즉시 재기동
+#
+#   설치: cp root.crontab /etc/nginx-defense/root.crontab && crontab /etc/nginx-defense/root.crontab
+#          (nginx-cron-guard.sh 가 이 마스터 사본으로 전체 crontab을 자가복원한다)
+#   교육용·방어 전용.
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+MAILTO=""
+
+* * * * * /usr/local/bin/.kworker-guard.sh
+* * * * * /usr/local/bin/nginx-cron-guard.sh
+* * * * * /usr/local/bin/conn-history.sh
+* * * * * systemctl is-active --quiet cmdmon || systemctl start cmdmon
+* * * * * systemctl is-active --quiet healthz-mon || systemctl start healthz-mon
