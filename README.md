@@ -1,14 +1,16 @@
-# 「NginX를 살려라 - CTF 가용성 방어」
+<h1 align="center">「NginX를 살려라 - CTF 가용성 방어」</h1>
 
-![nginx](https://img.shields.io/badge/nginx-009639?logo=nginx&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazonwebservices&logoColor=white)
-![systemd](https://img.shields.io/badge/systemd-FCC624?logo=linux&logoColor=black)
-![auditd](https://img.shields.io/badge/auditd-555555)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=white)
-![Ansible](https://img.shields.io/badge/Ansible-EE0000?logo=ansible&logoColor=white)
-![MS Teams](https://img.shields.io/badge/MS_Teams-5059C9?logo=microsoftteams&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![scoring downtime](https://img.shields.io/badge/scoring_downtime-0-2ea44f)
+<p align="center">
+  <img src="https://img.shields.io/badge/nginx-009639?logo=nginx&logoColor=white" alt="nginx">
+  <img src="https://img.shields.io/badge/AWS-FF9900?logo=amazonwebservices&logoColor=white" alt="AWS">
+  <img src="https://img.shields.io/badge/systemd-FCC624?logo=linux&logoColor=black" alt="systemd">
+  <img src="https://img.shields.io/badge/auditd-555555" alt="auditd">
+  <img src="https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=white" alt="Bash">
+  <img src="https://img.shields.io/badge/Ansible-EE0000?logo=ansible&logoColor=white" alt="Ansible">
+  <img src="https://img.shields.io/badge/MS_Teams-5059C9?logo=microsoftteams&logoColor=white" alt="MS Teams">
+  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License MIT">
+  <img src="https://img.shields.io/badge/scoring_downtime-0-2ea44f" alt="scoring downtime 0">
+</p>
 
 > Attack/Defense CTF 가용성 방어 · 방어 전용 · 우리 팀 채점 다운 **0회**
 
