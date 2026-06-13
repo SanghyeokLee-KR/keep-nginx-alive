@@ -1,4 +1,4 @@
-# 「NginX를 살려라」 — 광명융합기술교육원 5조
+# 「NginX를 살려라 - CTF 가용성 방어」
 
 ![nginx](https://img.shields.io/badge/nginx-009639?logo=nginx&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-FF9900?logo=amazonwebservices&logoColor=white)
